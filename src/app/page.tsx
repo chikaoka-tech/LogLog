@@ -1,63 +1,52 @@
 import Link from "next/link"
-import { blogPosts } from "@/lib/blog-posts"
+import PostList from "@/components/PostList"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-200">
-      <header className="sticky top-0 z-10 border-b border-cyan-900/70 bg-slate-900/90 backdrop-blur">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
-          <Link href="/" className="text-2xl font-semibold tracking-tight text-cyan-300">
-            LogLog
+    <div className="relative overflow-hidden">
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(34,211,238,0.12),transparent)]"
+        aria-hidden
+      />
+      <section className="relative mx-auto max-w-6xl px-4 pb-6 pt-14 sm:px-6 sm:pb-10 sm:pt-20">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400/90">Engineer blog</p>
+        <h1 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-slate-50 sm:text-4xl md:text-5xl">
+          学びと実装を、すっきり記録する。
+        </h1>
+        <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-slate-400 sm:text-lg">
+          フロントエンドからバックエンドまで。日々のメモと試行錯誤を LogLog に残しています。
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link
+            href="/blog"
+            className="inline-flex items-center justify-center rounded-full bg-cyan-500 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-400"
+          >
+            記事一覧へ
           </Link>
-          <nav aria-label="Primary navigation">
-            <ul className="flex items-center gap-6 text-sm font-medium text-slate-300">
-              <li>
-                <a className="transition hover:text-cyan-300" href="#">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a className="transition hover:text-cyan-300" href="#">
-                  About
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-
-      <section className="mx-auto w-full max-w-6xl px-6 py-10">
-        <div className="mb-8">
-          <p className="text-sm font-medium uppercase tracking-widest text-cyan-400/80">Engineer Blog</p>
-          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-100">Latest Articles</h2>
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {blogPosts.map((post) => (
-            <Link
-              key={post.id}
-              href={`/blog/${post.id}`}
-              className="block overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/80 shadow-sm transition hover:-translate-y-0.5 hover:border-cyan-700 hover:shadow-cyan-950/40"
-            >
-              <article>
-                <div className="flex h-44 items-center justify-center bg-gradient-to-br from-slate-800 via-slate-900 to-cyan-950/60 text-sm font-medium tracking-wide text-cyan-200/70">
-                  Dummy Image
-                </div>
-                <div className="space-y-3 p-5">
-                  <div className="flex items-center justify-between text-xs text-slate-400">
-                    <time dateTime={post.date}>{post.date}</time>
-                    <span className="rounded-full border border-cyan-800 bg-cyan-950/50 px-2.5 py-1 font-medium text-cyan-300">
-                      {post.tag}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-semibold leading-snug text-slate-100">{post.title}</h3>
-                  <p className="text-sm leading-relaxed text-slate-400">{post.description}</p>
-                </div>
-              </article>
-            </Link>
-          ))}
+          <Link
+            href="/about"
+            className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-900/50 px-5 py-2.5 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:bg-slate-800/80 hover:text-white"
+          >
+            このサイトについて
+          </Link>
         </div>
       </section>
-    </main>
+
+      <section id="articles" className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+        <div className="mb-10 flex flex-col gap-2 border-b border-slate-800/80 pb-8 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold tracking-tight text-slate-100">Latest articles</h2>
+            <p className="mt-1 text-sm text-slate-500">直近の投稿です。</p>
+          </div>
+          <Link
+            href="/blog"
+            className="text-sm font-medium text-cyan-400/90 transition hover:text-cyan-300"
+          >
+            すべて見る →
+          </Link>
+        </div>
+        <PostList />
+      </section>
+    </div>
   )
 }
