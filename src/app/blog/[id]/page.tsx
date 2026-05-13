@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { blogPosts, getPostById } from "@/lib/blog-posts"
+import Sidebar from "@/components/Sidebar";
 
 type PageProps = {
   params: Promise<{ id: string }>
@@ -94,27 +95,8 @@ export default async function BlogArticlePage({ params }: PageProps) {
               </div>
             </div>
           </div>
-
-          <aside className="w-full shrink-0 lg:w-72 lg:pt-2">
-            <div className="sticky top-24 rounded-2xl border border-slate-800 bg-slate-900/80 p-6 shadow-sm">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full border border-cyan-800/80 bg-gradient-to-br from-slate-800 to-cyan-950/70 text-lg font-semibold text-cyan-200">
-                美容
-              </div>
-              <h2 className="mt-4 text-lg font-semibold text-slate-100">プロフィール</h2>
-              <p className="mt-1 text-sm font-medium text-cyan-300/90">美容師 / IT学習中</p>
-              <p className="mt-4 text-sm leading-relaxed text-slate-400">
-                都内サロンで美容師として<strong className="font-medium text-slate-200">約9年</strong>
-                。カット・カラー・スタイリングを中心に、お客様の日常に寄り添う提案を大切にしています。
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-slate-400">
-                業務の合間に<strong className="font-medium text-slate-200">プログラミングとインフラ</strong>
-                を学習中。現場の手間を減らす仕組みづくりにも興味があります。
-              </p>
-              <p className="mt-4 text-xs leading-relaxed text-slate-500">
-                このブログでは技術メモと、サロンとエンジニアリングの交差点からの気づきを書いていきます。
-              </p>
-            </div>
-          </aside>
+          {/* サイドバー */}
+          <Sidebar /> 
         </div>
       </div>
     </main>
