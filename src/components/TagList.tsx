@@ -11,11 +11,11 @@ export default function TagList({ activeTag }: TagListProps) {
   const normalized = activeTag?.trim()
 
   return (
-    <nav className="mb-8" aria-label="タグで絞り込み">
+    <nav className="mb-8 min-w-0" aria-label="タグで絞り込み">
       <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Tags</p>
-      <ul className="flex flex-wrap gap-2">
+      <ul className="flex min-w-0 touch-pan-x gap-2 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:overflow-visible sm:pb-0">
         {tags.map((tag) => (
-          <li key={tag}>
+          <li key={tag} className="shrink-0">
             <TagBadge tag={tag} isActive={normalized === tag} />
           </li>
         ))}

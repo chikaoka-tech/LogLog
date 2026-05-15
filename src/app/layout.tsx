@@ -29,9 +29,9 @@ export default function RootLayout({
       lang="ja"
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth`}
     >
-      <body className="flex min-h-full flex-col bg-slate-950 font-sans text-slate-200 antialiased">
+      <body className="flex min-h-full min-w-0 flex-col overflow-x-clip bg-slate-950 font-sans text-slate-200 antialiased">
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="min-w-0 flex-1">{children}</main>
         <Footer />
       </body>
     </html>

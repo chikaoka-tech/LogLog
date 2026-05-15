@@ -3,12 +3,12 @@ import PostList from "@/components/PostList"
 
 export default function Home() {
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative min-w-0 overflow-hidden">
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(34,211,238,0.12),transparent)]"
         aria-hidden
       />
-      <section className="relative mx-auto max-w-6xl px-4 pb-6 pt-14 sm:px-6 sm:pb-10 sm:pt-20">
+      <section className="relative mx-auto max-w-6xl min-w-0 px-4 pb-6 pt-14 sm:px-6 sm:pb-10 sm:pt-20">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400/90">Engineer blog</p>
         <h1 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-slate-50 sm:text-4xl md:text-5xl">
           学びと実装を、すっきり記録する。
@@ -32,7 +32,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="articles" className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+      <section id="articles" className="relative mx-auto max-w-6xl min-w-0 px-4 py-12 sm:px-6 sm:py-16">
         <div className="mb-10 flex flex-col gap-2 border-b border-slate-800/80 pb-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-slate-100">Latest articles</h2>

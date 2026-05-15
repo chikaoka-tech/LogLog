@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+html {
+  overflow-x: clip;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
