@@ -5,14 +5,12 @@ export type Blog = {
     title: string;
     content: string;
     publishedAt: string;
-    eyecatch?: {
+    eyecatch: {
         url: string;
         height: number;
         width: number;
     };
-    category?: string;
-    name: string;
     tags: string[];
-    updatedAt?: string;
-    description?: string;
+    updatedAt: string;
+    description: string;
 };

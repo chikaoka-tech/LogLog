@@ -9,7 +9,7 @@ type PageProps = {
 }
 
 export function generateStaticParams() {
-  return blogPosts.map((p) => ({ id: String(p.id) }))
+  return blogPosts.map((p) => ({ id: p.id }))
 }
 
 export async function generateMetadata({ params }: PageProps) {
@@ -27,7 +27,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
   const post = getPostById(id)
   if (!post) notFound()
 
-  const heroSrc = `https://picsum.photos/seed/${encodeURIComponent(post.imageSeed)}/1200/630`
+  const { url: heroSrc, width: heroW, height: heroH } = post.eyecatch
 
   return (
     <div className="relative">
@@ -44,18 +44,23 @@ export default async function BlogArticlePage({ params }: PageProps) {
                 {post.title}
               </h1>
               <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-slate-500">
-                <time dateTime={post.date}>{post.date}</time>
-                <span className="rounded-full border border-cyan-800/60 bg-cyan-950/40 px-2.5 py-1 text-xs font-medium text-cyan-300/95">
-                  {post.tag}
-                </span>
+                <time dateTime={post.publishedAt}>{post.publishedAt}</time>
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-cyan-800/60 bg-cyan-950/40 px-2.5 py-1 text-xs font-medium text-cyan-300/95"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
 
               <div className="relative mt-8 overflow-hidden rounded-2xl border border-slate-800/90 bg-slate-900/50 shadow-xl shadow-black/30 ring-1 ring-white/[0.03]">
                 <Image
                   src={heroSrc}
                   alt={post.title}
-                  width={1200}
-                  height={630}
+                  width={heroW}
+                  height={heroH}
                   className="h-auto w-full object-cover"
                   sizes="(max-width: 1024px) 100vw, 768px"
                   priority
@@ -64,7 +69,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
 
               <article
                 className="prose prose-slate prose-invert mt-10 max-w-none leading-relaxed prose-headings:scroll-mt-24 prose-headings:font-semibold prose-headings:text-slate-100 prose-p:text-slate-300 prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-slate-100 prose-code:rounded-md prose-code:bg-slate-800/90 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-cyan-200 prose-pre:border prose-pre:border-slate-800 prose-pre:bg-slate-900/80 prose-blockquote:border-cyan-700/40 prose-blockquote:text-slate-400 prose-hr:border-slate-800 prose-li:marker:text-cyan-600"
-                dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+                dangerouslySetInnerHTML={{ __html: post.content }}
               />
 
               <div className="mt-12 flex justify-center border-t border-slate-800/80 pt-10">

@@ -1,10 +1,15 @@
 import Link from "next/link"
-import { blogPosts } from "@/lib/blog-posts"
+import type { Blog } from "@/types/blog"
+import { blogPosts } from "@/lib/posts"
 
-export default function PostList() {
+type PostListProps = {
+  posts?: Blog[]
+}
+
+export default function PostList({ posts = blogPosts }: PostListProps) {
   return (
     <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
-      {blogPosts.map((post) => (
+      {posts.map((post) => (
         <Link
           key={post.id}
           href={`/blog/${post.id}`}
@@ -15,11 +20,18 @@ export default function PostList() {
               Preview
             </div>
             <div className="space-y-3 p-5">
-              <div className="flex items-center justify-between gap-2 text-xs text-slate-500">
-                <time dateTime={post.date}>{post.date}</time>
-                <span className="shrink-0 rounded-full border border-cyan-800/60 bg-cyan-950/40 px-2.5 py-0.5 font-medium text-cyan-300/95">
-                  {post.tag}
-                </span>
+              <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+                <time dateTime={post.publishedAt}>{post.publishedAt}</time>
+                <div className="flex shrink-0 flex-wrap justify-end gap-1.5">
+                  {post.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-cyan-800/60 bg-cyan-950/40 px-2.5 py-0.5 font-medium text-cyan-300/95"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
               <h3 className="text-lg font-semibold leading-snug text-slate-100 transition group-hover:text-cyan-100">
                 {post.title}
