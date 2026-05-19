@@ -1,19 +1,20 @@
 import Link from "next/link"
-import type { Blog } from "@/types/blog"
+import type { Blog } from "@/lib/types"
 import EyecatchImage from "@/components/EyecatchImage"
-import { blogPosts } from "@/lib/posts"
+import { getBlogPosts } from "@/lib/posts"
 
 type PostListProps = {
   posts?: Blog[]
 }
 
-export default function PostList({ posts = blogPosts }: PostListProps) {
+export default async function PostList({ posts }: PostListProps) {
+  const items = posts ?? (await getBlogPosts())
   return (
     <div className="grid min-w-0 grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
-      {posts.map((post, index) => (
+      {items.map((post, index) => (
         <Link
           key={post.id}
-          href={`/blog/${post.id}`}
+          href={`/posts/${post.slug}`}
           className="group block min-w-0 w-full overflow-hidden rounded-2xl border border-slate-800/90 bg-slate-900/40 shadow-sm shadow-black/20 ring-1 ring-white/[0.02] transition duration-200 hover:-translate-y-0.5 hover:border-cyan-500/35 hover:shadow-cyan-950/25"
         >
           <article className="min-w-0">

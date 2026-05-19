@@ -7,7 +7,7 @@ type TagBadgeProps = {
 }
 
 export default function TagBadge({ tag, isActive }: TagBadgeProps) {
-  const href = isActive ? "/blog" : `/blog?tag=${encodeURIComponent(tag)}`
+  const href = isActive ? "/posts" : `/posts?tag=${encodeURIComponent(tag)}`
 
   return (
     <Link

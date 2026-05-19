@@ -1,1 +1,7 @@
-export { blogPosts, getPostById, getAllTags, getFilteredPosts } from "./posts"
+export {
+  getBlogPosts,
+  getPostBySlug,
+  getAllTags,
+  getFilteredPosts,
+  getAllPostSlugs,
+} from "./posts"

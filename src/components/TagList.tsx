@@ -6,8 +6,8 @@ type TagListProps = {
   activeTag?: string
 }
 
-export default function TagList({ activeTag }: TagListProps) {
-  const tags = getAllTags()
+export default async function TagList({ activeTag }: TagListProps) {
+  const tags = await getAllTags()
   const normalized = activeTag?.trim()
 
   return (

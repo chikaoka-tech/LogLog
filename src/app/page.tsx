@@ -1,7 +1,10 @@
 import Link from "next/link"
 import PostList from "@/components/PostList"
+import { getBlogPosts } from "@/lib/posts"
 
-export default function Home() {
+export default async function Home() {
+  const latest = (await getBlogPosts()).slice(0, 6)
+
   return (
     <div className="relative min-w-0 overflow-hidden">
       <div
@@ -18,7 +21,7 @@ export default function Home() {
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
-            href="/blog"
+            href="/posts"
             className="inline-flex items-center justify-center rounded-full bg-cyan-500 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-400"
           >
             記事一覧へ
@@ -39,13 +42,13 @@ export default function Home() {
             <p className="mt-1 text-sm text-slate-500">直近の投稿です。</p>
           </div>
           <Link
-            href="/blog"
+            href="/posts"
             className="text-sm font-medium text-cyan-400/90 transition hover:text-cyan-300"
           >
             すべて見る →
           </Link>
         </div>
-        <PostList />
+        <PostList posts={latest} />
       </section>
     </div>
   )
