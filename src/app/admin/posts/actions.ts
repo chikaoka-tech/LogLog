@@ -12,6 +12,7 @@ import {
   isSlugTaken,
   updatePost,
 } from "@/lib/post-service"
+import { requireUser } from "@/lib/supabase/server"
 
 function revalidatePostPaths(slug: string) {
   revalidatePath("/admin/posts")
@@ -28,6 +29,8 @@ export async function createPostAction(
   _prev: PostFormState,
   formData: FormData,
 ): Promise<PostFormState> {
+  await requireUser()
+
   const validation = validatePostForm(formData)
   if (!validation.ok) {
     return withValues(formData, { errors: validation.errors })
@@ -60,6 +63,8 @@ export async function updatePostAction(
   _prev: PostFormState,
   formData: FormData,
 ): Promise<PostFormState> {
+  await requireUser()
+
   const postId = String(formData.get("postId") ?? "").trim()
   if (!postId) {
     return withValues(formData, { errors: { title: "記事 ID が不正です。" } })
@@ -102,6 +107,8 @@ export async function updatePostAction(
 }
 
 export async function deletePostAction(postId: string): Promise<DeletePostState> {
+  await requireUser()
+
   const id = postId.trim()
   if (!id) return { error: "記事 ID が不正です。" }
 

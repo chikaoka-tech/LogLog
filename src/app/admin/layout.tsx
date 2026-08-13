@@ -1,13 +1,27 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 import AdminNavLinks from "@/components/admin/AdminNavLinks"
+import { createClient } from "@/lib/supabase/server"
 
 export const metadata: Metadata = {
   title: { default: "Admin", template: "%s · Admin | LogLog" },
   robots: { index: false, follow: false },
 }
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  let user = null
+  try {
+    const supabase = await createClient()
+    const { data } = await supabase.auth.getUser()
+    user = data.user
+  } catch {
+    user = null
+  }
+
+  if (!user) {
+    redirect("/login")
+  }
   return (
     <div className="border-t border-slate-800/90 bg-[#0d1117] text-slate-200">
       <div className="mx-auto flex min-h-[calc(100vh-3.5rem)] max-w-[1600px] min-w-0">
