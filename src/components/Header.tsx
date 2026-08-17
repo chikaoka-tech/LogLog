@@ -18,16 +18,16 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/75 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-6xl min-w-0 items-center justify-between gap-3 px-4 sm:h-16 sm:gap-6 sm:px-6">
         <Link
           href="/"
-          className="shrink-0 text-lg font-semibold tracking-tight text-slate-100 transition hover:text-cyan-400 sm:text-xl"
+          className="shrink-0 text-lg font-semibold tracking-tight text-slate-100 transition hover:text-cyan-300 sm:text-xl"
         >
           LogLog
         </Link>
         <nav aria-label="Primary navigation" className="min-w-0">
-          <ul className="flex min-w-0 items-center justify-end gap-0.5 sm:gap-2">
+          <ul className="flex min-w-0 items-center justify-end gap-0.5 sm:gap-1">
             {nav.map(({ href, label }) => {
               const active = isActive(href)
               return (

@@ -9,6 +9,16 @@ type PostListProps = {
 
 export default async function PostList({ posts }: PostListProps) {
   const items = posts ?? (await getBlogPosts())
+
+  if (items.length === 0) {
+    return (
+      <div className="rounded-2xl border border-dashed border-slate-800 bg-slate-900/30 px-6 py-14 text-center">
+        <p className="text-sm font-medium text-slate-300">まだ公開記事がありません</p>
+        <p className="mt-2 text-sm text-slate-500">最初の記事が公開されると、ここに並びます。</p>
+      </div>
+    )
+  }
+
   return (
     <div className="grid min-w-0 grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
       {items.map((post, index) => (

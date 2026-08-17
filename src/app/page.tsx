@@ -11,13 +11,15 @@ export default async function Home() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(34,211,238,0.12),transparent)]"
         aria-hidden
       />
-      <section className="relative mx-auto max-w-6xl min-w-0 px-4 pb-6 pt-14 sm:px-6 sm:pb-10 sm:pt-20">
+      <section className="relative mx-auto max-w-6xl min-w-0 px-4 pb-8 pt-16 sm:px-6 sm:pb-12 sm:pt-24">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400/90">Engineer blog</p>
-        <h1 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-slate-50 sm:text-4xl md:text-5xl">
-          学びと実装を、すっきり記録する。
+        <h1 className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-slate-50 sm:text-5xl sm:leading-[1.15] md:text-6xl">
+          <span className="block">学びと実装を、</span>
+          <span className="block text-cyan-200">すっきり記録する。</span>
         </h1>
-        <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-slate-400 sm:text-lg">
-          フロントエンドからバックエンドまで。日々のメモと試行錯誤を LogLog に残しています。
+        <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-slate-400 sm:text-lg">
+          <span className="block">フロントエンドからバックエンドまで。</span>
+          <span className="block">日々のメモと試行錯誤を LogLog に残しています。</span>
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link

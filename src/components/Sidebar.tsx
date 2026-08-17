@@ -12,7 +12,7 @@ export default function Sidebar() {
           LL
         </div>
         <p className="mt-5 text-sm leading-relaxed text-slate-400">
-          札幌を拠点に活動する美容師兼エンジニア。SES 企業に勤めながらモダンな Web 技術を学習中。個人サイト「LogLog」を開発しています。
+          札幌を拠点に活動するエンジニア。個人サイト「LogLog」を開発しています。
         </p>
         <Link
           href="/about"
