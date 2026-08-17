@@ -1,6 +1,7 @@
 "use server"
 
 import { createClient } from "@/lib/supabase/server"
+import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
 export async function login(formData: FormData) {
@@ -15,14 +16,20 @@ export async function login(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword({ email, password })
 
   if (error) {
+    console.error("login:", error.message)
     redirect("/login?error=1")
   }
 
+  revalidatePath("/", "layout")
   redirect("/admin")
 }
 
 export async function logout() {
-  const supabase = await createClient()
-  await supabase.auth.signOut()
+  try {
+    const supabase = await createClient()
+    await supabase.auth.signOut()
+  } catch {
+    // セッション切れでもログイン画面へ戻す
+  }
   redirect("/login")
 }

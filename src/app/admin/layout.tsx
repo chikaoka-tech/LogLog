@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { redirect } from "next/navigation"
+import { logout } from "@/app/login/actions"
 import AdminNavLinks from "@/components/admin/AdminNavLinks"
 import { createClient } from "@/lib/supabase/server"
 
@@ -33,12 +34,14 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             <AdminNavLinks />
           </nav>
           <div className="mt-8 space-y-3 border-t border-slate-800/80 px-2 pt-6">
-            <Link
-              href="/admin/logout"
-              className="block text-xs text-slate-500 transition hover:text-rose-400/90"
-            >
-              Log out
-            </Link>
+            <form action={logout}>
+              <button
+                type="submit"
+                className="block text-xs text-slate-500 transition hover:text-rose-400/90"
+              >
+                Log out
+              </button>
+            </form>
             <Link
               href="/"
               className="block text-xs text-slate-500 transition hover:text-cyan-400/90"
@@ -49,11 +52,13 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         </aside>
 
         <div className="min-w-0 flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
-          <p className="mb-4 lg:hidden">
-            <Link href="/admin/logout" className="text-xs text-slate-500 hover:text-rose-400/90">
-              Log out
-            </Link>
-          </p>
+          <div className="mb-4 lg:hidden">
+            <form action={logout}>
+              <button type="submit" className="text-xs text-slate-500 hover:text-rose-400/90">
+                Log out
+              </button>
+            </form>
+          </div>
           {children}
         </div>
       </div>
