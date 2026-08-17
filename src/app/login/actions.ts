@@ -1,25 +1,32 @@
 "use server"
 
 import { createClient } from "@/lib/supabase/server"
+import { clearLoginFailures, isLoginLocked, recordLoginFailure } from "@/lib/login-rate-limit"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
 export async function login(formData: FormData) {
+  if (await isLoginLocked()) {
+    redirect("/login?error=locked")
+  }
+
   const email = formData.get("email")
   const password = formData.get("password")
 
   if (typeof email !== "string" || typeof password !== "string") {
-    redirect("/login?error=1")
+    const locked = await recordLoginFailure()
+    redirect(locked ? "/login?error=locked" : "/login?error=1")
   }
 
   const supabase = await createClient()
   const { error } = await supabase.auth.signInWithPassword({ email, password })
 
   if (error) {
-    console.error("login:", error.message)
-    redirect("/login?error=1")
+    const locked = await recordLoginFailure()
+    redirect(locked ? "/login?error=locked" : "/login?error=1")
   }
 
+  await clearLoginFailures()
   revalidatePath("/", "layout")
   redirect("/admin")
 }

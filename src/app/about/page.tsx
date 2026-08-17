@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "About",
-  description: "LogLog について。",
+  description: "LogLog について。札幌を拠点に、学びと実装のメモを公開する個人ブログです。",
 }
 
 export default function AboutPage() {
@@ -20,10 +20,10 @@ export default function AboutPage() {
         <div className="mt-8 rounded-2xl border border-slate-800/90 bg-slate-900/40 p-6 shadow-lg shadow-black/20 ring-1 ring-white/[0.02] sm:p-8">
           <div className="prose prose-invert prose-slate max-w-none text-slate-300 prose-p:leading-relaxed prose-headings:scroll-mt-24 prose-headings:font-semibold prose-headings:text-slate-100">
             <p>
-              LogLog は、エンジニアとしての学習や実装のメモを整理して公開する個人ブログです。フロントエンドを中心に、気になった技術や設計の考え方を書き留めています。
+              LogLog は、札幌を拠点に活動するエンジニアの個人ブログです。日々の学習や実装でつまずいたところ、うまくいったところを、あとから読み返せる形で残しています。
             </p>
             <p>
-              ご連絡やフィードバックは、SNS やブログのコメント欄など、お好みのチャネルからどうぞ（ダミーテキストです）。
+              フロントエンドを中心に、Next.js や TypeScript、設計の考え方を書いていきます。完成した解説というより、自分のメモを公開する場所です。
             </p>
           </div>
         </div>

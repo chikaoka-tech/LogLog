@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
+import { redirect } from "next/navigation"
 import { login } from "./actions"
+import { createClient } from "@/lib/supabase/server"
 
 export const metadata: Metadata = {
   title: "ログイン",
@@ -11,6 +13,14 @@ export default async function LoginPage({
 }: {
   searchParams: Promise<{ error?: string }>
 }) {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+  if (user) {
+    redirect("/admin")
+  }
+
   const { error } = await searchParams
 
   return (
@@ -49,7 +59,9 @@ export default async function LoginPage({
             />
           </label>
 
-          {error ? (
+          {error === "locked" ? (
+            <p className="text-sm text-rose-400">試行回数が多すぎます。15分ほど待ってから再度お試しください。</p>
+          ) : error ? (
             <p className="text-sm text-rose-400">メールまたはパスワードが違います</p>
           ) : null}
 
