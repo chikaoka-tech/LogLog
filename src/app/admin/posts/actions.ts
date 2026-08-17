@@ -45,7 +45,6 @@ export async function createPostAction(
   try {
     await createPost(data)
     revalidatePostPaths(data.slug)
-    redirect("/admin/posts")
   } catch (error) {
     const message = postActionErrorMessage(error)
     if (message) {
@@ -57,6 +56,8 @@ export async function createPostAction(
       errors: { title: "保存に失敗しました。しばらくしてから再度お試しください。" },
     })
   }
+
+  redirect("/admin/posts")
 }
 
 export async function updatePostAction(
@@ -92,7 +93,6 @@ export async function updatePostAction(
     if (existing.slug !== data.slug) {
       revalidatePath(`/posts/${existing.slug}`)
     }
-    redirect("/admin/posts")
   } catch (error) {
     const message = postActionErrorMessage(error)
     if (message) {
@@ -104,6 +104,8 @@ export async function updatePostAction(
       errors: { title: "更新に失敗しました。しばらくしてから再度お試しください。" },
     })
   }
+
+  redirect("/admin/posts")
 }
 
 export async function deletePostAction(postId: string): Promise<DeletePostState> {
